@@ -5,6 +5,9 @@
 - build-essentialとlibpq-devはnokogiri等のため
   - nokogiriはrailsに必要
 
+- ほんとに最初はdocker-container run app bashでコンテナ内で少しだけ作業
+  - (bundle initや1番最初のbundle install, rails newの時にもするかも)
+
 - dockerコンテナの中で1度bundle install --path=vendor/bundle
   - このディレクトリはdocker-compose.ymlにvolumeとして記述
     - キャッシュが効くようになる
