@@ -12,3 +12,4 @@ WORKDIR $APP_DIR
 COPY . $APP_DIR
 
 RUN gem install bundler
+RUN bundle install --path=vendor/bundle
