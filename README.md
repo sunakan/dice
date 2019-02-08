@@ -13,3 +13,22 @@
     - キャッシュが効くようになる
   - コンテナ内でbundle installをした理由は、ホスト側にbundlerがない前提のため
     - 次からDockerfileに記述する(次からGemfile, Gemfile.lockもあるからOK)
+
+## rails new のオプション
+
+```
+$ rails new . -B -G -O -T -M -C --skip-coffee --skip-turbolinks
+```
+
+- -B
+  - --skip-bundle
+- -G
+  - --skip-git
+- -O
+  - --skip-active-recode
+- -T
+  - --skip-test-unit
+- -M
+  - --skip-action-mailer
+- -C
+  - --skip-action-cable
