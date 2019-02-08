@@ -28,4 +28,5 @@ end
 
 group :development, :test do
   gem "rspec-rails"
+  gem "rubocop"
 end
