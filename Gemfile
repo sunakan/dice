@@ -27,6 +27,6 @@ group :development do
 end
 
 group :development, :test do
-  gem "rubocop", require: false
   gem "rails_best_practices", require: false
+  gem "rubocop", require: false
 end
