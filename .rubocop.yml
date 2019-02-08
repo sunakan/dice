@@ -325,3 +325,9 @@ Rails/RequestReferer:
 
 Rails/DynamicFindBy:
   Enabled: false
+
+Style/MixinUsage:
+  Enabled: true
+  Exclude:
+    - "bin/update"
+    - "bin/setup"
