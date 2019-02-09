@@ -79,6 +79,9 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
+    onkcop (0.53.0.3)
+      rubocop (>= 0.53.0)
+      rubocop-rspec (>= 1.24.0)
     parallel (1.13.0)
     parser (2.6.0.0)
       ast (~> 2.4.0)
@@ -141,6 +144,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.4.0)
+    rubocop-rspec (1.32.0)
+      rubocop (>= 0.60.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     sass (3.7.3)
@@ -189,6 +194,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   listen (>= 3.0.5, < 3.2)
+  onkcop
   puma (~> 3.11)
   rails (~> 5.2.2)
   rspec-rails
