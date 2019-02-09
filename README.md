@@ -32,3 +32,26 @@ $ rails new . -B -G -O -T -M -C --skip-coffee --skip-turbolinks
   - --skip-action-mailer
 - -C
   - --skip-action-cable
+
+## heroku
+
+### bundler 2.0
+
+```
+$ heroku buildpacks:set https://github.com/bundler/heroku-buildpack-bundler2
+```
+
+### herokuでpumaを起動させるにはProcfileが必要
+
+- 中身(1行のみ)
+
+```
+web: bundle exec puma -C config/puma.rb
+```
+
+### herokuへpush,build
+
+- masterをpush
+  - `git push heroku master`
+- hogeブランチをpush,それをbuild
+  - `git push heroku hoge:master`
