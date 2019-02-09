@@ -20,14 +20,23 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
-  # rubocop
-  gem "onkcop", require: false
-  gem "rubocop", require: false
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
+# For code review
+group :development do
+  # rubocop
+  gem "onkcop", require: false
+  gem "rubocop", require: false
+  # haml
+  gem "haml_lint", require: false
+end
+
 group :development, :test do
   gem "rspec-rails"
 end
+
+# (HTML)テンプレートエンジン
+gem "haml-rails"
