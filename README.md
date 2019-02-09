@@ -32,3 +32,11 @@ $ rails new . -B -G -O -T -M -C --skip-coffee --skip-turbolinks
   - --skip-action-mailer
 - -C
   - --skip-action-cable
+
+## heroku
+
+### bundler 2.0
+
+```
+$ heroku buildpacks:set https://github.com/bundler/heroku-buildpack-bundler2
+```
