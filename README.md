@@ -1,4 +1,8 @@
-# dice
+# Dice
+
+[![CircleCI](https://circleci.com/gh/sunakan/dice.svg?style=svg)](https://circleci.com/gh/sunakan/dice)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9459ae16e000e5444cfb/maintainability)](https://codeclimate.com/github/sunakan/dice/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9459ae16e000e5444cfb/test_coverage)](https://codeclimate.com/github/sunakan/dice/test_coverage)
 
 ## Dockerfileの個人的ポイント
 
@@ -55,3 +59,27 @@ web: bundle exec puma -C config/puma.rb
   - `git push heroku master`
 - hogeブランチをpush,それをbuild
   - `git push heroku hoge:master`
+
+### herokuへpush,buildできてもブラウザでアプリを開くとエラー
+
+- precompile
+  - precompile時、yarnで怒られるならファイルはあってもだめ
+    - yarnを入れればよい
+- db:create, db:migrate系
+
+### herokuへpush,buildに関して、いろいろ情報が出てきて方法ありすぎぃ
+
+- 結局
+  - git heroku push master
+    - heroku.ymlが必須(Procfileの代わり&addonとかもこれにまとめられる)
+    - Procfileいらない(pumaでは必要とか載ってる情報は少し古いため気をつける)
+- 昔
+  - image buildしてpushしてreleaseとか古い
+
+### CircleCIのconfigファイルのvalidationチェックはlocalで
+
+- https://circleci.com/docs/2.0/local-cli/#validate-a-circleci-config
+
+```
+$ circleci config validate
+```
