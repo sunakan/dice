@@ -12,11 +12,19 @@
 - ほんとに最初はdocker-container run app bashでコンテナ内で少しだけ作業
   - (bundle initや1番最初のbundle install, rails newの時にもするかも)
 
-- dockerコンテナの中で1度bundle install --path=vendor/bundle
-  - このディレクトリはdocker-compose.ymlにvolumeとして記述
-    - キャッシュが効くようになる
-  - コンテナ内でbundle installをした理由は、ホスト側にbundlerがない前提のため
-    - 次からDockerfileに記述する(次からGemfile, Gemfile.lockもあるからOK)
+- ~~dockerコンテナの中で1度bundle install --path=vendor/bundle~~
+  - ~~このディレクトリはdocker-compose.ymlにvolumeとして記述~~
+    - ~~キャッシュが効くようになる~~
+  - ~~コンテナ内でbundle installをした理由は、ホスト側にbundlerがない前提のため~~
+    - ~~次からDockerfileに記述する(次からGemfile, Gemfile.lockもあるからOK)~~
+
+- Dockerfileにproductionモードでのprecompile処理を書いとく
+  - docker-compose時はdevelopmentを指定で開発、テスト
+  - herokuで使う && deployしたあと、手元でheroku run XXXXとするのが面倒
+
+- Dockerfile.dev的なものが必要かもしれない...
+  - docker-composeのdockerfileはDockerfile.devを指定とか
+  - 問題点: Dockerfileの2重管理が発生する
 
 ## rails new のオプション
 

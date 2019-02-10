@@ -56,7 +56,12 @@ workflows:
   version: 2
   my_flows:
     jobs:
-      - test
+      - test:
+          filters:
+            branches:
+              only:
+                - master
+                - feature/*
       - deploy:
           filters:
             branches:
