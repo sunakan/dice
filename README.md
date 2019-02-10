@@ -53,7 +53,7 @@ $ rails new . -B -G -O -T -M -C --skip-coffee --skip-turbolinks
 $ heroku buildpacks:set https://github.com/bundler/heroku-buildpack-bundler2
 ```
 
-### herokuでpumaを起動させるにはProcfileが必要
+### ~~herokuでpumaを起動させるにはProcfileが必要~~(情報が古い。。。今はheroku.yml)
 
 - 中身(1行のみ)
 
