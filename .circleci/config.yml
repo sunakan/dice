@@ -3,6 +3,12 @@
 # 自動deployに関して
 # 1. herokuでAPI_KEYを発行(Acctoun settingsより発行可能)
 # 2. CircleCIのダッシュボードよりEnvironment Variablesで環境変数を登録
+#
+# CodeClimateのコードカバレッジに関して
+# 1. CodeClimateのダッシュボードよりTest coverage用のTEST REPORTER IDをコピー
+# 2. CircleCIのダッシュボードよりEnvironment Variablesで環境変数を登録(CC_TEST_REPORTER_ID)
+# 3. sedでrspecが吐く.resultset.jsonのパスをdocker-composeのコンテナ外に合わせて相対パスにする
+#   - checkout先を/appにするのは失敗した(working_directory:ではだめ)
 
 version: 2
 
@@ -19,8 +25,20 @@ jobs:
           name: docker-compose up
           command: docker-compose up -d
       - run:
-          name: rspec
-          command: docker-compose exec app bundle exec rspec
+          name: CodeClimateのtest-reporterファイルをダウンロードと実行権限の付与
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: rspecとコードカバレッジのアップロード
+          command: |
+            ./cc-test-reporter before-build
+            docker-compose exec app bundle exec rspec
+            sudo sed -i -e 's/"\/app\//".\//g' coverage/.resultset.json
+            ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
+      - run:
+          name: cc-test-reporter before-build
+          command: ./cc-test-reporter before-build
       - run:
           name: docker-compose down
           command: docker-compose down
