@@ -3,6 +3,7 @@
 # 自動deployに関して
 # 1. herokuでAPI_KEYを発行(Acctoun settingsより発行可能)
 # 2. CircleCIのダッシュボードよりEnvironment Variablesで環境変数を登録
+# 3. git push heroku masterのエラー時、TOKENが丸見えになるので標準出力に変えてgrepで消す
 #
 # CodeClimateのコードカバレッジに関して
 # 1. CodeClimateのダッシュボードよりTest coverage用のTEST REPORTER IDをコピー
@@ -49,7 +50,7 @@ jobs:
       - checkout
       - run:
           name: git push heroku master
-          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master 2>&1 | grep -v http
 
 workflows:
   version: 2
