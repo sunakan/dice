@@ -61,7 +61,7 @@ workflows:
             branches:
               only:
                 - master
-                - feature/*
+                - /feature.*/
       - deploy:
           requires:
             - test
