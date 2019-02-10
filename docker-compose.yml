@@ -3,10 +3,22 @@
 version: "3"
 
 services:
+  datastore:
+    image: busybox
+    volumes:
+      - bundle_install:/app/vendor/bundle
+
   app:
     build: .
-    command: bundle exec puma
+    command: bundle exec puma -C config/puma.rb
+    environment:
+      - RAILS_ENV=development
     ports:
       - 80:3000
     volumes:
       - .:/app
+      - bundle_install:/usr/local/bundle
+
+volumes:
+  bundle_install:
+    driver: local
