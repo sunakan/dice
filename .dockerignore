@@ -1,0 +1,10 @@
+.git
+.gitignore
+tmp/*
+log/*
+coverage/*
+README.md
+docker-compose.yml
+.rspec
+.rubocop.yml
+containers
