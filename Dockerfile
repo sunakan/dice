@@ -1,30 +1,25 @@
-FROM ruby:2.6.1-slim-stretch
+FROM ruby:2.6.1-alpine3.9
 
-RUN apt-get update -qq && apt-get install -y locales build-essential libpq-dev nodejs wget
+# nokogiriのために g++,make,libxml2-dev,libxslt-dev 入れたら、他のも全部入った
+# yarnはalpine3.6+からapkで入る!!
+# tzdataはprecopile時にTZInfo::ZoneinfoDirectoryNotFoundとか言われたので、入れる
+RUN apk update && \
+  apk add --update --no-cache --virtual .build-depends \
+  g++ make libxml2-dev libxslt-dev \
+  yarn \
+  tzdata
 
-RUN sed -i 's/#.*ja_JP\.UTF/ja_JP\.UTF/' /etc/locale.gen
-RUN locale-gen && update-locale LANG=ja_JP.UTF-8
+WORKDIR /app
+RUN gem install bundler -N
+COPY Gemfile* ./
+RUN bundle install
 
-# yarn(最新版はエラーがでる)
-# https://github.com/yarnpkg/yarn/issues/6900
-#RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
-#    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-#    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-#    apt-get update && apt-get install -y yarn
-# old version
-RUN wget https://nightly.yarnpkg.com/debian/pool/main/y/yarn/yarn_1.9.0-20180719.1538_all.deb && \
-    apt-get install ./yarn_1.9.0-20180719.1538_all.deb
+COPY . ./
 
-ENV APP_DIR /app
-RUN mkdir $APP_DIR
-WORKDIR $APP_DIR
+# yarn install
+RUN yarn install
 
-COPY . $APP_DIR
-
-RUN gem install bundler
-RUN bundle install -j4
-
+# precopile
 RUN bundle exec rake assets:precompile RAILS_ENV=production
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
-#CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
