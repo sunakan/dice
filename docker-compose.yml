@@ -1,6 +1,7 @@
 ---
 
-version: "3"
+# buildのtargetを指定したい = 3.4以上
+version: "3.4"
 
 services:
   datastore:
@@ -9,7 +10,10 @@ services:
       - bundle_install:/app/vendor/bundle
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
     command: bundle exec puma -C config/puma.rb
     environment:
       - RAILS_ENV=development
@@ -17,7 +21,7 @@ services:
       - 80:3000
     volumes:
       - .:/app
-      - bundle_install:/usr/local/bundle
+      - bundle_install:/app/vendor/bundle
 
 volumes:
   bundle_install:
