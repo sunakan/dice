@@ -1,0 +1,18 @@
+# Note
+# hostsにはdocker-composeのservice名orコンテナ名でipを指定可能
+development:
+  clients:
+    default:
+      database: app_development
+      hosts:
+        - mongodb:27017
+test:
+  clients:
+    default:
+      database: app_test
+      hosts:
+        - mongodb:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1

@@ -41,3 +41,6 @@ end
 
 # (HTML)テンプレートエンジン
 gem "haml-rails"
+
+# MongoDBのORM(Object-relational mapping)
+gem "mongoid"
