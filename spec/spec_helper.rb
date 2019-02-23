@@ -24,12 +24,14 @@ RSpec.configure do |config|
   # after  :suite
   config.before(:suite) do
     DatabaseCleaner[:mongoid].strategy = :truncation
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner[:active_record].strategy = :truncation
   end
   config.before do
-    DatabaseCleaner.start
+    DatabaseCleaner[:mongoid].start
+    DatabaseCleaner[:active_record].start
   end
   config.after do
-    DatabaseCleaner.clean
+    DatabaseCleaner[:mongoid].clean
+    DatabaseCleaner[:active_record].clean
   end
 end
