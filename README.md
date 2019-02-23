@@ -102,5 +102,11 @@ $ sudo docker-compose exec app bundle exec ridgepole -c config/database.yml -E d
 ### active\_recordを使ってmodel生成
 
 ~~~
-$ docker-compose exec app bundle exec rails g active_record:model member --skip-migration
+$ sudo docker-compose exec app bundle exec rails g active_record:model member --skip-migration
+~~~
+
+### FactoryBot
+
+~~~
+$ sudo docker-compose exec app bundle exec rails g factory_bot:model user
 ~~~
