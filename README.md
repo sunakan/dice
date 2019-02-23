@@ -91,3 +91,16 @@ web: bundle exec puma -C config/puma.rb
 ```
 $ circleci config validate
 ```
+
+### Ridgepole
+
+~~~
+$ sudo docker-compose exec app bundle exec rake db:create
+$ sudo docker-compose exec app bundle exec ridgepole -c config/database.yml -E development --apply -f db/Schemafile
+~~~
+
+### active\_recordを使ってmodel生成
+
+~~~
+$ docker-compose exec app bundle exec rails g active_record:model member --skip-migration
+~~~

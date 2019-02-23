@@ -1,0 +1,12 @@
+# ランクB: https://paiza.jp/learning/divisions-number
+
+create_table "members", force: :cascade, id: false, primary_key: [:member_id], unique: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.bigint "member_id", null: false
+  t.string "name", null: false
+  t.bigint "division_id", null: false
+end
+
+create_table "divisions", force: :cascade, id: false, primary_key: [:division], unique: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.bigint "division_id", null: false
+  t.string "division_name", null: false
+end

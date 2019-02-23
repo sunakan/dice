@@ -44,3 +44,8 @@ gem "haml-rails"
 
 # MongoDBのORM(Object-relational mapping)
 gem "mongoid"
+
+# RDBのスキーマ管理をマイグレーション(デフォルト)=>RidgePole
+gem "ridgepole"
+# MySQL/MariaDBクライアント
+gem "mysql2"
