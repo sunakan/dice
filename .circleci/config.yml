@@ -29,8 +29,10 @@ jobs:
           name: docker-compose build
           command: docker-compose build
       - run:
-          name: docker-compose up
-          command: docker-compose up -d
+          name: docker-compose up と DB立ち上げを待つ
+          command: |
+            docker-compose up -d
+            docker-compose exec app dockerize -wait tcp://mariadb:3306 -timeout 1m
       - run:
           name: CodeClimateのtest-reporterファイルをダウンロードと実行権限の付与
           command: |
