@@ -35,12 +35,12 @@ group :development do
 end
 
 group :development, :test do
-  gem "rspec-rails"
-  gem "simplecov"
+  gem "database_cleaner"
   gem "factory_bot_rails"
   gem "faker"
   gem "gimei"
-  gem "database_cleaner"
+  gem "rspec-rails"
+  gem "simplecov"
 end
 
 # (HTML)テンプレートエンジン
