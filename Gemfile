@@ -37,6 +37,7 @@ end
 group :development, :test do
   gem "rspec-rails"
   gem "simplecov"
+  gem "factory_bot_rails"
 end
 
 # (HTML)テンプレートエンジン
