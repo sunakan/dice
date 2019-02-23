@@ -40,6 +40,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "gimei"
+  gem "database_cleaner"
 end
 
 # (HTML)テンプレートエンジン
