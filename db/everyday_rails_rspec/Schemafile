@@ -1,0 +1,4 @@
+require "users.schema"
+require "tasks.schema"
+require "projects.schema"
+require "notes.schema"
