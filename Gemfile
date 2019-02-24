@@ -35,6 +35,10 @@ group :development do
 end
 
 group :development, :test do
+  gem "database_cleaner"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "gimei"
   gem "rspec-rails"
   gem "simplecov"
 end
@@ -44,3 +48,8 @@ gem "haml-rails"
 
 # MongoDBのORM(Object-relational mapping)
 gem "mongoid"
+
+# RDBのスキーマ管理をマイグレーション(デフォルト)=>RidgePole
+gem "ridgepole"
+# MySQL/MariaDBクライアント
+gem "mysql2"

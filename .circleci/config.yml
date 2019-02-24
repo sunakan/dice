@@ -32,6 +32,15 @@ jobs:
           name: docker-compose up
           command: docker-compose up -d
       - run:
+          name: DBの立ち上がりを待つ
+          command: docker-compose exec app dockerize -wait tcp://mariadb:3306 -timeout 1m
+      - run:
+          name: DBの作成
+          command: docker-compose exec app bundle exec rake db:create RAILS_ENV=test
+      - run:
+          name: テーブル群の作成
+          command: docker-compose exec app bundle exec ridgepole -c config/database.yml -E test --apply -f db/Schemafile
+      - run:
           name: CodeClimateのtest-reporterファイルをダウンロードと実行権限の付与
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

@@ -1,0 +1,17 @@
+mariadb_default: &mariadb_default
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password: password
+  host: mariadb
+  port: 3306
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *mariadb_default
+  database: dice_development
+
+test:
+  <<: *mariadb_default
+  database: dice_test
