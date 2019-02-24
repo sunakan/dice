@@ -10,7 +10,8 @@ namespace :ext_db do
     Dir.glob(Rails.root.join("config", "ext_databases", "*_database.yml")) do |yml_file|
       config = YAML.load_file(yml_file)[Rails.env]
       next if config.blank?
-      ActiveRecord::Tasks::DatabaseTasks.create(config)
+
+      ActiveRecord::Tasks::DatabaseTasks.create!(config)
     end
   end
   desc "複数DB用 db:drop (config/ext_databases/*_database.yml)"
@@ -18,6 +19,7 @@ namespace :ext_db do
     Dir.glob(Rails.root.join("config", "ext_databases", "*_database.yml")) do |config_file|
       config = YAML.load_file(config_file)[Rails.env]
       next if config.blank?
+
       ActiveRecord::Tasks::DatabaseTasks.drop(config)
     end
   end
