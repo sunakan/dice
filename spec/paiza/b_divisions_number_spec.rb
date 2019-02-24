@@ -25,7 +25,7 @@ RSpec.describe "[B] 部署毎の人数を数える" do # rubocop:disable RSpec/D
   it "生SQL" do
     sql = File.read(File.expand_path("b_divisions_number.sql", __dir__))
     result = Division.connection.execute(sql)
-    output = result.to_a.map {|r| r.join(" ")}.join("\n")
+    output = result.to_a.map {|r| r.join(" ") }.join("\n")
     expect(output).to eq(answer)
   end
 end
