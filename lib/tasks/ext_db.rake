@@ -30,6 +30,10 @@ namespace :ext_db do
       Dir.glob(Rails.root.join("config", "ext_databases", "*_database.yml")) do |config_file|
         base_db_name = Pathname(config_file).basename.to_s.match(/\A(.*)_database.yml\z/)[1]
         schema_file = Rails.root.join("db", base_db_name, "Schemafile").to_s
+        unless Pathname(schema_file).exist?
+          puts "Not found #{schema_file}"
+          next
+        end
         command = "bundle exec ridgepole -c #{config_file} -E #{Rails.env} --apply -f #{schema_file}"
         system command
       end
