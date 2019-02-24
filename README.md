@@ -97,6 +97,7 @@ $ circleci config validate
 ~~~
 $ sudo docker-compose exec app bundle exec rake db:create
 $ sudo docker-compose exec app bundle exec ridgepole -c config/database.yml -E development --apply -f db/Schemafile
+$ sudo docker-compose exec app bundle exec ridgepole -c config/database.yml -E test --apply -f db/everyday_rails_rspec/Schemafile
 ~~~
 
 ### active\_recordを使ってmodel生成
