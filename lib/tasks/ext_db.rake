@@ -11,7 +11,7 @@ namespace :ext_db do
       config = YAML.load_file(yml_file)[Rails.env]
       next if config.blank?
 
-      ActiveRecord::Tasks::DatabaseTasks.create!(config)
+      ActiveRecord::Tasks::DatabaseTasks.create(config) # rubocop:disable Rails/SaveBang
     end
   end
   desc "複数DB用 db:drop (config/ext_databases/*_database.yml)"
