@@ -10,8 +10,8 @@ FROM ruby:2.6.1-alpine3.9 as builder
 WORKDIR /app
 COPY Gemfile* ./
 RUN apk update && \
-  apk add --no-cache --virtual .build-depends g++ make libxml2-dev libxslt-dev mariadb-connector-c-dev && \
-  apk add --no-cache yarn tzdata && \
+  apk add --no-cache --virtual .build-depends g++ make libxml2-dev libxslt-dev&& \
+  apk add --no-cache yarn tzdata mariadb-connector-c-dev && \
   gem install bundler -N && \
   bundle install --no-cache -j4 --path=vendor/bundle
 
@@ -27,7 +27,7 @@ WORKDIR /app
 COPY Gemfile* ./
 COPY --from=builder /app/vendor/bundle /app/vendor/bundle
 RUN apk update && \
-  apk add --no-cache yarn tzdata && \
+  apk add --no-cache yarn tzdata mariadb-connector-c-dev && \
   gem install bundler -N && \
   bundle install --no-cache -j4 --path=vendor/bundle --without development test && \
   bundle clean && \
