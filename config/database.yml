@@ -11,10 +11,16 @@ mariadb_default: &mariadb_default
 development:
   <<: *mariadb_default
   database: dice_development
+everyday_rails_rspec_development:
+  <<: *mariadb_default
+  database: everyday_rails_rspec_development
 
 test:
   <<: *mariadb_default
   database: dice_test
+everyday_rails_rspec_test:
+  <<: *mariadb_default
+  database: everyday_rails_rspec_test
 
 production:
   <<: *mariadb_default
