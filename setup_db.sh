@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "Setup DB"
+echo "====================Waiting DB"
+sudo docker-compose exec app dockerize -wait tcp://mariadb:3306 -timeout 1m
 echo "====================rake db:create"
 sudo docker-compose exec app bundle exec rake db:create
 echo "====================ridgepole -c config/database.yml -E development --apply -f db/Schemafile"
