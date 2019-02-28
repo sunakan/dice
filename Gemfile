@@ -40,6 +40,7 @@ group :development, :test do
   gem "faker"
   gem "gimei"
   gem "rspec-rails"
+  gem "shoulda-matchers"
   gem "simplecov"
 end
 
