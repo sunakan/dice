@@ -22,4 +22,6 @@ class Worldcup2014::Country < Worldcup2014::AppRecord
   validates :group_name, presence: true
   validates :group_name, length: { is: 1 }
   validates :group_name, inclusion: { in: Group.all }
+
+  has_many :players
 end
