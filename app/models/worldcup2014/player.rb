@@ -9,7 +9,8 @@ class Worldcup2014::Player < Worldcup2014::AppRecord
     end
   end
 
-  validates :id, presence: true, on: :create
+  validates :id, presence: true, on: :update
+  validates :id, uniqueness: true, on: :update
   validates :country_id, presence: true
   validates :country_id, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :uniform_num, presence: true
