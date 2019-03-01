@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Worldcup2014::Player, type: :model do
   it { is_expected.to validate_presence_of(:id).on(:update) }
   it { is_expected.to validate_uniqueness_of(:id).on(:update) }
-  it { is_expected.to validate_presence_of(:country_id).on(:create) }
+  it { is_expected.to validate_presence_of(:country_id) }
   it { is_expected.to validate_numericality_of(:country_id).is_greater_than_or_equal_to(0) }
   it { is_expected.to belong_to(:country) }
   it { is_expected.to validate_presence_of(:uniform_num) }
