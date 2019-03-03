@@ -4,6 +4,25 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/9459ae16e000e5444cfb/maintainability)](https://codeclimate.com/github/sunakan/dice/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9459ae16e000e5444cfb/test_coverage)](https://codeclimate.com/github/sunakan/dice/test_coverage)
 
+## 複数DB
+
+- 設定ファイル
+  - main
+    - config/database.yml
+    - config/mongoid.yml
+  - sub
+    - config/ext\_datases/\*\_database.yml
+- Model
+  - main
+    - app/models/直下
+  - sub
+    - app/models/hoge.rb
+      - Hoge::DATABASE_YAML = hoge\_database.ymlへのパス
+      - Hoge::AppRecordがサブDBへのconnectionを貼る
+      - Hoge::AppRecordはabstract class
+    - app/models/hoge/\*.rb
+      - Hoge::User << Hoge::AppRecord
+
 ## Dockerfileの個人的ポイント
 
 - build-essentialとlibpq-devはnokogiri等のため
@@ -25,25 +44,8 @@
 - Dockerfile.dev的なものが必要かもしれない...
   - docker-composeのdockerfileはDockerfile.devを指定とか
   - 問題点: Dockerfileの2重管理が発生する
-
-## rails new のオプション
-
-```
-$ rails new . -B -G -O -T -M -C --skip-coffee --skip-turbolinks
-```
-
-- -B
-  - --skip-bundle
-- -G
-  - --skip-git
-- -O
-  - --skip-active-recode
-- -T
-  - --skip-test-unit
-- -M
-  - --skip-action-mailer
-- -C
-  - --skip-action-cable
+    - 解決: マルチビルドステージとdocker-compose(3.4以上)によるビルドステージの指定
+    - docker-composeは開発用と割り切る(buildオプションでビルドステージを指定)
 
 ## heroku
 

@@ -36,10 +36,14 @@ jobs:
           command: docker-compose exec app dockerize -wait tcp://mariadb:3306 -timeout 1m
       - run:
           name: DBの作成
-          command: docker-compose exec app bundle exec rake db:create RAILS_ENV=test
+          command: |
+            docker-compose exec app bundle exec rake db:create RAILS_ENV=test
+            docker-compose exec app bundle exec rake ext_db:create RAILS_ENV=test
       - run:
           name: テーブル群の作成
-          command: docker-compose exec app bundle exec ridgepole -c config/database.yml -E test --apply -f db/Schemafile
+          command: |
+            docker-compose exec app bundle exec ridgepole -c config/database.yml -E test --apply -f db/Schemafile
+            docker-compose exec app bundle exec rake ext_db:ridgepole:apply RAILS_ENV=test
       - run:
           name: CodeClimateのtest-reporterファイルをダウンロードと実行権限の付与
           command: |

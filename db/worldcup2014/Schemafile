@@ -1,0 +1,28 @@
+create_table "countries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  t.string "name", limit: 50
+  t.integer "ranking"
+  t.string "group_name", limit: 1
+end
+
+create_table "goals", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  t.integer "pairing_id"
+  t.integer "player_id"
+  t.string "goal_time", limit: 10
+end
+
+create_table "pairings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  t.datetime "kickoff"
+  t.integer "my_country_id"
+  t.integer "enemy_country_id"
+end
+
+create_table "players", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  t.integer "country_id"
+  t.integer "uniform_num"
+  t.string "position", limit: 2
+  t.string "name", limit: 50
+  t.string "club", limit: 50
+  t.date "birth"
+  t.integer "height"
+  t.integer "weight"
+end
