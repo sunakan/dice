@@ -15,14 +15,21 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner[:active_record].strategy = :truncation
+    #DatabaseCleaner[:active_record, model: Worldcup2014::AppRecord].strategy = :truncation
+    DatabaseCleaner[:active_record, model: EverydayRailsRspec::AppRecord].strategy = :truncation
+    load(Rails.root.join("db", "worldcup2014", "seeds.rb"))
   end
   config.before do
     DatabaseCleaner[:mongoid].start
     DatabaseCleaner[:active_record].start
+    #DatabaseCleaner[:active_record, model: Worldcup2014::AppRecord].start
+    DatabaseCleaner[:active_record, model: EverydayRailsRspec::AppRecord].start
   end
   config.after do
     DatabaseCleaner[:mongoid].clean
     DatabaseCleaner[:active_record].clean
+    #DatabaseCleaner[:active_record, model: Worldcup2014::AppRecord].clean
+    DatabaseCleaner[:active_record, model: EverydayRailsRspec::AppRecord].clean
   end
 end
 
