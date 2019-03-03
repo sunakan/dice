@@ -11,14 +11,14 @@ RSpec.describe "各グループの中でFIFAランクが最も高い国と低い
       ["E", 6, 33],
       ["F", 5, 44],
       ["G", 2, 37],
-      ["H", 11, 57]
+      ["H", 11, 57],
     ]
   }
   it "ActiveRecord-1" do
     grouped = Worldcup2014::Country.group(:group_name)
     high_ranks = grouped.minimum(:ranking)
     low_ranks  = grouped.maximum(:ranking)
-    output = high_ranks.merge(low_ranks) { |key, high_rank, low_rank| [key, high_rank, low_rank] }.values
+    output = high_ranks.merge(low_ranks) {|key, high_rank, low_rank| [key, high_rank, low_rank] }.values
     output.unshift(["グループ", "ランキング最上位", "ランキング最下位"])
     expect(output).to eq(answer)
   end
@@ -31,7 +31,7 @@ RSpec.describe "各グループの中でFIFAランクが最も高い国と低い
   end
 
   it "生SQL" do
-    file = File.basename(__FILE__).match(/\A(.*)_spec\.rb\z/) { |matched| "#{matched[1]}.sql" }
+    file = File.basename(__FILE__).match(/\A(.*)_spec\.rb\z/) {|matched| "#{matched[1]}.sql" }
     sql  = File.read(File.expand_path(file, __dir__))
     result = Worldcup2014::Country.connection.execute(sql)
     output = [result.fields].concat(result.each)
