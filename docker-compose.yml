@@ -54,6 +54,13 @@ services:
     ports:
       - 3306:3306
 
+  jenkins:
+    image: jenkins/jenkins:lts-slim
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/dice
+
 volumes:
   bundle_install:
     driver: local
