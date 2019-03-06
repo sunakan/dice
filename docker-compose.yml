@@ -60,6 +60,7 @@ services:
       - 8080:8080
     volumes:
       - .:/dice
+      - ./containers/jenkins/jenkins_home/jobs:/var/jenkins_home/jobs
 
 volumes:
   bundle_install:
