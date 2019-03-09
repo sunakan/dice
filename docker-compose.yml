@@ -54,13 +54,17 @@ services:
     ports:
       - 3306:3306
 
+  # buildが指定してある場合は、imageは不要(buildが優先される)
+  # docker-compose exec jenkins /var/jenkins_home/secrets/initialAdminPassword
   jenkins:
-    image: jenkins/jenkins:lts-slim
+    build:
+      context: ./containers/jenkins
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
     volumes:
       - .:/dice
-      - ./containers/jenkins/jenkins_home/jobs:/var/jenkins_home/jobs
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   bundle_install:
