@@ -38,6 +38,7 @@ pipeline {
   }
   post {
     always {
+      echo "always"
       //sh "docker-compose down"
       // rspecの共有しているdockerでやっているため、出力先もworkspace以下ではなく、/dice以下となる
       // workspaceの外に出れない
