@@ -1,6 +1,11 @@
 class Tdd::Doller
+  # Javaのprivate => Rubyのprotected
+  protected
   attr_accessor :amount
 
+  # publicとわざわざ書いてある理由
+  #   protectedをわかりやすく上で宣言したかったため
+  public
   def initialize(amount)
     @amount = amount
   end
