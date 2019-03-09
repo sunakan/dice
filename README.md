@@ -23,6 +23,13 @@
     - app/models/hoge/\*.rb
       - Hoge::User << Hoge::AppRecord
 
+## 実行
+
+```
+$ sudo docker-compose up
+$ sh setup_db.sh
+```
+
 ## Dockerfileの個人的ポイント
 
 - build-essentialとlibpq-devはnokogiri等のため
