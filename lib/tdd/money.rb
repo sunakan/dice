@@ -4,7 +4,7 @@ class Tdd::Money
 
   public
   def eql?(obj)
-    @amount == obj.amount
+    @amount == obj.amount && self.class.equal?(obj.class)
   end
 
   def hash
