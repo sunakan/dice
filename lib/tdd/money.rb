@@ -14,4 +14,8 @@ class Tdd::Money
   def self.dollar(amount)
     Tdd::Dollar.new(amount)
   end
+
+  def self.franc(amount)
+    Tdd::Franc.new(amount)
+  end
 end
