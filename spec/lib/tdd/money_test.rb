@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
   it "test multiplication" do
-    five = Tdd::Dollar.new(5)
+    five = Tdd::Money.dollar(5)
     expect(five.times(2)).to eql(Tdd::Dollar.new(10))
     expect(five.times(3)).to eql(Tdd::Dollar.new(15))
   end

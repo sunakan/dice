@@ -10,4 +10,8 @@ class Tdd::Money
   def hash
     @amount.hash
   end
+
+  def self.dollar(amount)
+    Tdd::Dollar.new(amount)
+  end
 end
