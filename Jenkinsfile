@@ -4,11 +4,11 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: "3"))
   }
   stages {
-    stage("checkout") {
-      steps {
-        checkout scm
-      }
-    }
+    //stage("checkout") {
+    //  steps {
+    //    checkout scm
+    //  }
+    //}
     //composeでhost側のdocker.sockを使うとコメントアウトしている部分は不要
     // - composeを使っているのでhostでcompose upしていたらportがバッティングする
     //stage("docker-compose build app") {
@@ -40,21 +40,22 @@ pipeline {
     always {
       //sh "docker-compose down"
       // rspecの共有しているdockerでやっているため、出力先もworkspace以下ではなく、/dice以下となる
-      junit "/dice/spec/reports/rspec.xml"
-      cobertura(
-        autoUpdateHealth: false,
-        autoUpdateStability: false,
-        coberturaReportFile: "/dice/coverage/coverage.xml",
-        conditionalCoverageTargets: "70, 0, 0",
-        failUnhealthy: false,
-        failUnstable: false,
-        lineCoverageTargets: "80, 0, 0",
-        maxNumberOfBuilds: 0,
-        methodCoverageTargets: "80, 0, 0",
-        onlyStable: false,
-        sourceEncoding: "ASCII",
-        zoomCoverageChart: false
-      )
+      // workspaceの外に出れない
+      //junit "/dice/spec/reports/rspec.xml"
+      //cobertura(
+      //  autoUpdateHealth: false,
+      //  autoUpdateStability: false,
+      //  coberturaReportFile: "/dice/coverage/coverage.xml",
+      //  conditionalCoverageTargets: "70, 0, 0",
+      //  failUnhealthy: false,
+      //  failUnstable: false,
+      //  lineCoverageTargets: "80, 0, 0",
+      //  maxNumberOfBuilds: 0,
+      //  methodCoverageTargets: "80, 0, 0",
+      //  onlyStable: false,
+      //  sourceEncoding: "ASCII",
+      //  zoomCoverageChart: false
+      //)
     }
   }
 }
