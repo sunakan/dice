@@ -32,14 +32,15 @@ pipeline {
     }
     stage("rspec") {
       steps {
-        sh "docker exec dice_app bundle exec rspec"
+        sh "docker exec -e RAILS_ENV=test -e SPEC_OPTS='--no-color' -i dice_app bundle exec rspec --format RspecJunitFormatter --out spec/reports/rspec.xml --format progress spec"
       }
     }
   }
   post {
     always {
       //sh "docker-compose down"
-      echo "ALWAYS"
+      junit "spec/reports/rspec.xml"
+      cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
     }
   }
 }
