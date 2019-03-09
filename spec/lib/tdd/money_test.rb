@@ -8,4 +8,9 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
     product = five.times(3)
     expect(product.amount).to eq(15)
   end
+
+  it "test equality" do
+    expect(Tdd::Doller.new(5).equals(Tdd::Doller.new(5))).to be_truthy
+    expect(Tdd::Doller.new(5).equals(Tdd::Doller.new(6))).to be_falsy
+  end
 end
