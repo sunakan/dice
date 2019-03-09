@@ -10,6 +10,7 @@ services:
       - bundle_install:/app/vendor/bundle
 
   app:
+    container_name: dice_app
     build:
       context: .
       dockerfile: Dockerfile
