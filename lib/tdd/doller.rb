@@ -5,6 +5,6 @@ class Tdd::Doller
     @amount = amount
   end
   def times(multiplier)
-    @amount *= multiplier
+    Tdd::Doller.new(@amount * multiplier)
   end
 end
