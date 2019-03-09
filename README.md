@@ -113,3 +113,13 @@ $ sudo docker-compose exec app bundle exec rails g active_record:model member --
 ~~~
 $ sudo docker-compose exec app bundle exec rails g factory_bot:model user
 ~~~
+
+### Jenkins: インストール済みのプラグイン一覧をplugins.txtに出力
+
+~~~
+$ curl -X GET -u $USER_NAME:$API_TOKEN -sSL "$JENKINS_URL:$JENKINS_PORT/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/'
+~~~
+
+- APIの取得
+  1. 右上のユーザー名をクリック語、メニューから設定（Configure）をクリック
+  1. プロフィール画面から、「APIトークンの表示」をクリック
