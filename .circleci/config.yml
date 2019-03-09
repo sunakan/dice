@@ -26,8 +26,8 @@ jobs:
             sudo chmod +x /usr/local/bin/docker-compose
             sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
       - run:
-          name: docker-compose build
-          command: docker-compose build
+          name: docker-compose build app
+          command: docker-compose build app
       - run:
           name: docker-compose up
           command: docker-compose up -d

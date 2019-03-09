@@ -11,7 +11,7 @@ pipeline {
     }
     stage("docker-compose build") {
       steps {
-        sh "docker-compose build"
+        sh "docker-compose build app"
       }
     }
   }
