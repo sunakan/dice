@@ -23,16 +23,16 @@ pipeline {
     //}
     stage("setup db") {
       steps {
-        sh "docker-compose exec app dockerize -wait tcp://mariadb:3306 -timeout 1m"
-        sh "docker-compose exec app bundle exec rake db:create RAILS_ENV=test"
-        sh "docker-compose exec app bundle exec rake ext_db:create RAILS_ENV=test"
-        sh "docker-compose exec app bundle exec ridgepole -c config/database.yml -E test --apply -f db/Schemafile"
-        sh "docker-compose exec app bundle exec rake ext_db:ridgepole:apply RAILS_ENV=test"
+        sh "docker exec dice_app dockerize -wait tcp://mariadb:3306 -timeout 1m"
+        sh "docker exec dice_app bundle exec rake db:create RAILS_ENV=test"
+        sh "docker exec dice_app bundle exec rake ext_db:create RAILS_ENV=test"
+        sh "docker exec dice_app bundle exec ridgepole -c config/database.yml -E test --apply -f db/Schemafile"
+        sh "docker exec dice_app bundle exec rake ext_db:ridgepole:apply RAILS_ENV=test"
       }
     }
     stage("rspec") {
       steps {
-        sh "docker-compose exec app bundle exec rspec"
+        sh "docker exec dice_app bundle exec rspec"
       }
     }
   }
