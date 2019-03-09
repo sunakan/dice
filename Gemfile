@@ -40,8 +40,10 @@ group :development, :test do
   gem "faker"
   gem "gimei"
   gem "rspec-rails"
+  gem "rspec_junit_formatter"
   gem "shoulda-matchers"
   gem "simplecov"
+  gem "simplecov-cobertura"
 end
 
 # (HTML)テンプレートエンジン

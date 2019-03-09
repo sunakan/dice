@@ -10,6 +10,7 @@ services:
       - bundle_install:/app/vendor/bundle
 
   app:
+    container_name: dice_app
     build:
       context: .
       dockerfile: Dockerfile
@@ -53,6 +54,18 @@ services:
       - TZ=Asia/Tokyo
     ports:
       - 3306:3306
+
+  # buildが指定してある場合は、imageは不要(buildが優先される)
+  # docker-compose exec jenkins /var/jenkins_home/secrets/initialAdminPassword
+  jenkins:
+    build:
+      context: ./containers/jenkins
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/dice
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   bundle_install:
