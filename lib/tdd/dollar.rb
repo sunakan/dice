@@ -1,9 +1,9 @@
-class Tdd::Doller < Tdd::Money
+class Tdd::Dollar < Tdd::Money
   def initialize(amount)
     @amount = amount
   end
 
   def times(multiplier)
-    Tdd::Doller.new(@amount * multiplier)
+    Tdd::Dollar.new(@amount * multiplier)
   end
 end
