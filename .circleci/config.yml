@@ -29,8 +29,8 @@ jobs:
           name: docker-compose build app
           command: docker-compose build app
       - run:
-          name: docker-compose up app -d
-          command: docker-compose up app -d
+          name: docker-compose up -d app
+          command: docker-compose up -d app
       - run:
           name: DBの立ち上がりを待つ
           command: docker-compose exec app dockerize -wait tcp://mariadb:3306 -timeout 1m
