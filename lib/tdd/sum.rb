@@ -8,8 +8,13 @@ class Tdd::Sum
     @addend = addend
   end
 
+  # TODO
+  def plus(addend)
+    nil
+  end
+
   def reduce(bank, to)
-    amount = @augend.amount + @addend.amount
+    amount = @augend.reduce(bank, to).amount + @addend.reduce(bank, to).amount
     Tdd::Money.new(amount, to)
   end
 end
