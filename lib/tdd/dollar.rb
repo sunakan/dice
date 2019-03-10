@@ -6,4 +6,8 @@ class Tdd::Dollar < Tdd::Money
   def times(multiplier)
     Tdd::Dollar.new(@amount * multiplier)
   end
+
+  def currency
+    "USD"
+  end
 end

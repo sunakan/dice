@@ -18,4 +18,9 @@ class Tdd::Money
   def self.franc(amount)
     Tdd::Franc.new(amount)
   end
+
+  # Javaのabstract methodと似たことをRubyで表現
+  def currency
+    raise NotImplementedError.new("#{self.class}##{__method__}を実装してください")
+  end
 end

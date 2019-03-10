@@ -20,4 +20,9 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
     expect(five.times(2)).to eql(Tdd::Money.franc(10))
     expect(five.times(3)).to eql(Tdd::Money.franc(15))
   end
+
+  it "test currency" do
+    expect(Tdd::Money.dollar(1).currency).to eq("USD")
+    expect(Tdd::Money.franc(1).currency).to eq("CHF")
+  end
 end
