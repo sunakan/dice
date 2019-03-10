@@ -1,10 +1,10 @@
 class Tdd::Franc < Tdd::Money
   def initialize(amount, currency)
     @amount = amount
-    @currency = "CHF"
+    @currency = currency
   end
 
   def times(multiplier)
-    Tdd::Franc.new(@amount * multiplier, nil)
+    Tdd::Money.franc(@amount * multiplier)
   end
 end

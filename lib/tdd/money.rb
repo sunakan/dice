@@ -17,7 +17,7 @@ class Tdd::Money
   end
 
   def self.franc(amount)
-    Tdd::Franc.new(amount, nil)
+    Tdd::Franc.new(amount, "CHF")
   end
 
   def currency
