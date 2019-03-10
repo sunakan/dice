@@ -1,8 +1,10 @@
 class Tdd::Bank
   private
-  attr_accessor :rates
+
+    attr_accessor :rates
 
   public
+
   def initialize
     @rates = {}
   end
@@ -18,6 +20,7 @@ class Tdd::Bank
 
   def rate(from, to)
     return 1 if from == to
+
     pair = Tdd::Pair.new(from, to)
     rates[pair]
   end

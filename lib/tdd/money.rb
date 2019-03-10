@@ -4,6 +4,7 @@ class Tdd::Money
   attr_accessor :amount, :currency
 
   public
+
   def initialize(amount, currency)
     @amount   = amount
     @currency = currency
@@ -25,9 +26,7 @@ class Tdd::Money
     Tdd::Money.new(amount, "CHF")
   end
 
-  def currency
-    @currency
-  end
+  attr_reader :currency
 
   # Tdd::Expression#timesの実装
   def times(multiplier)
@@ -42,6 +41,6 @@ class Tdd::Money
   # Tdd::Expression#reduceの実装
   def reduce(bank, to)
     rate = bank.rate(@currency, to)
-    Tdd::Money.new(@amount/rate, to)
+    Tdd::Money.new(@amount / rate, to)
   end
 end

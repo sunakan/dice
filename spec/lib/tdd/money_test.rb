@@ -8,9 +8,9 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
   end
 
   it "test equality" do
-    expect(Tdd::Money.dollar(5).eql?(Tdd::Money.dollar(5))).to be_truthy
-    expect(Tdd::Money.dollar(5).eql?(Tdd::Money.dollar(6))).to be_falsy
-    expect(Tdd::Money.dollar(5).eql?(Tdd::Money.franc(5))).to be_falsy
+    expect(Tdd::Money.dollar(5)).to be_eql(Tdd::Money.dollar(5))
+    expect(Tdd::Money.dollar(5)).not_to be_eql(Tdd::Money.dollar(6))
+    expect(Tdd::Money.dollar(5)).not_to be_eql(Tdd::Money.franc(5))
   end
 
   it "test franc multiplication" do
