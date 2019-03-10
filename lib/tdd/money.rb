@@ -4,6 +4,11 @@ class Tdd::Money
   attr_accessor :currency
 
   public
+  def initialize(amount, currency)
+    @amount   = amount
+    @currency = currency
+  end
+
   def eql?(obj)
     @amount == obj.amount && self.class.equal?(obj.class)
   end
