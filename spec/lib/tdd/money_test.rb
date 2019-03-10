@@ -45,4 +45,9 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
     result = bank.reduce(Tdd::Money.franc(2), "USD")
     expect(result).to eql(Tdd::Money.dollar(1))
   end
+
+  it "test identity rate" do
+    bank = Tdd::Bank.new
+    expect(bank.rate("USD", "USD")).to eq(1)
+  end
 end
