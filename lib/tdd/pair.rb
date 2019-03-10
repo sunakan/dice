@@ -10,8 +10,8 @@ class Tdd::Pair
     @to   = to
   end
 
-  def eql?(obj)
-    @from == obj.from && @to == obj.to
+  def eql?(other)
+    @from == other.from && @to == other.to
   end
 
   def hash

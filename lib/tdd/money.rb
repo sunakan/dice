@@ -1,17 +1,16 @@
 class Tdd::Money
   include Tdd::Expression
 
-  attr_accessor :amount, :currency
-
-  public
+  attr_accessor :amount
+  attr_reader :currency
 
   def initialize(amount, currency)
     @amount   = amount
     @currency = currency
   end
 
-  def eql?(obj)
-    @amount == obj.amount && @currency == obj.currency
+  def eql?(other)
+    @amount == other.amount && @currency == other.currency
   end
 
   def hash
@@ -25,8 +24,6 @@ class Tdd::Money
   def self.franc(amount)
     Tdd::Money.new(amount, "CHF")
   end
-
-  attr_reader :currency
 
   # Tdd::Expression#timesの実装
   def times(multiplier)
