@@ -18,11 +18,11 @@ class Tdd::Money
   end
 
   def self.dollar(amount)
-    Tdd::Dollar.new(amount, "USD")
+    Tdd::Money.new(amount, "USD")
   end
 
   def self.franc(amount)
-    Tdd::Franc.new(amount, "CHF")
+    Tdd::Money.new(amount, "CHF")
   end
 
   def currency

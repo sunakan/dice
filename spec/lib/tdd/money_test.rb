@@ -10,8 +10,6 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
   it "test equality" do
     expect(Tdd::Money.dollar(5).eql?(Tdd::Money.dollar(5))).to be_truthy
     expect(Tdd::Money.dollar(5).eql?(Tdd::Money.dollar(6))).to be_falsy
-    expect(Tdd::Money.franc(5).eql?(Tdd::Money.franc(5))).to be_truthy
-    expect(Tdd::Money.franc(5).eql?(Tdd::Money.franc(6))).to be_falsy
     expect(Tdd::Money.dollar(5).eql?(Tdd::Money.franc(5))).to be_falsy
   end
 
@@ -24,9 +22,5 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
   it "test currency" do
     expect(Tdd::Money.dollar(1).currency).to eq("USD")
     expect(Tdd::Money.franc(1).currency).to eq("CHF")
-  end
-
-  it "teset differenct class equality" do
-    expect(Tdd::Money.new(10, "CHF").eql?(Tdd::Franc.new(10, "CHF"))).to be_truthy
   end
 end
