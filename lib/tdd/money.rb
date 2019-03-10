@@ -9,18 +9,28 @@ class Tdd::Money
     @currency = currency
   end
 
+  # eql?のオーバーライド
   def eql?(other)
     @amount == other.amount && @currency == other.currency
   end
 
+  # eql?のオーバーライドに伴うhashのオーバーライド
   def hash
     @amount.hash
   end
 
+  # 米ドル通貨生成メソッド
+  # FactoryMethodパターン
+  # @params [Integer] amount 量
+  # @return [Tdd::Money] 米ドル通貨のMoneyインスタンス
   def self.dollar(amount)
     Tdd::Money.new(amount, "USD")
   end
 
+  # スイスフラン通貨生成メソッド
+  # FactoryMethodパターン
+  # @params [Integer] amount 量
+  # @return [Tdd::Money] スイスフラン通貨のMoneyインスタンス
   def self.franc(amount)
     Tdd::Money.new(amount, "CHF")
   end
