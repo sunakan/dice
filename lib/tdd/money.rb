@@ -1,6 +1,7 @@
 class Tdd::Money
   protected
   attr_accessor :amount
+  attr_accessor :currency
 
   public
   def eql?(obj)
@@ -19,8 +20,7 @@ class Tdd::Money
     Tdd::Franc.new(amount)
   end
 
-  # Javaのabstract methodと似たことをRubyで表現
   def currency
-    raise NotImplementedError.new("#{self.class}##{__method__}を実装してください")
+    @currency
   end
 end
