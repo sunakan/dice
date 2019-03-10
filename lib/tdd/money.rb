@@ -32,4 +32,8 @@ class Tdd::Money
   def times(multiplier)
     Tdd::Money.new(@amount * multiplier, @currency)
   end
+
+  def plus(addend)
+    Tdd::Money.new(@amount + addend.amount, @currency)
+  end
 end
