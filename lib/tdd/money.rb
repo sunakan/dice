@@ -1,7 +1,7 @@
 class Tdd::Money
-  protected
-  attr_accessor :amount
-  attr_accessor :currency
+  include Tdd::Expression
+
+  attr_accessor :amount, :currency
 
   public
   def initialize(amount, currency)
@@ -35,5 +35,10 @@ class Tdd::Money
 
   def plus(addend)
     Tdd::Money.new(@amount + addend.amount, @currency)
+  end
+
+  # Tdd::Expression#reduceの実装
+  def reduce(to)
+    self
   end
 end
