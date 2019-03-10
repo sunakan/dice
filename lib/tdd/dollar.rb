@@ -1,10 +1,10 @@
 class Tdd::Dollar < Tdd::Money
-  def initialize(amount)
+  def initialize(amount, currency)
     @amount = amount
-    @currency = "USD"
+    @currency = currency
   end
 
   def times(multiplier)
-    Tdd::Dollar.new(@amount * multiplier)
+    Tdd::Money.dollar(@amount * multiplier)
   end
 end
