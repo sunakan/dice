@@ -38,7 +38,8 @@ class Tdd::Money
   end
 
   # Tdd::Expression#reduceの実装
-  def reduce(to)
-    self
+  def reduce(bank, to)
+    rate = bank.rate(@currency, to)
+    Tdd::Money.new(@amount/rate, to)
   end
 end
