@@ -29,6 +29,7 @@ class Tdd::Money
     @currency
   end
 
+  # Tdd::Expression#timesの実装
   def times(multiplier)
     Tdd::Money.new(@amount * multiplier, @currency)
   end
