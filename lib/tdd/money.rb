@@ -33,7 +33,7 @@ class Tdd::Money
     Tdd::Money.new(@amount * multiplier, @currency)
   end
 
-  # Tdd::Expression#reduceの実装
+  # Tdd::Expression#plusの実装
   def plus(addend)
     Tdd::Sum.new(self, addend)
   end

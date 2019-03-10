@@ -59,4 +59,14 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
     result = bank.reduce(five_bucks.plus(ten_francs), "USD")
     expect(result).to eql(Tdd::Money.dollar(10))
   end
+
+  it "test sum plus money" do
+    five_bucks = Tdd::Money.dollar(5)
+    ten_francs = Tdd::Money.franc(10)
+    bank = Tdd::Bank.new
+    bank.add_rate("CHF", "USD", 2)
+    sum = Tdd::Sum.new(five_bucks, ten_francs).plus(five_bucks)
+    result = bank.reduce(sum, "USD")
+    expect(result).to eql(Tdd::Money.dollar(15))
+  end
 end
