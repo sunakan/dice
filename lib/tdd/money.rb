@@ -10,7 +10,7 @@ class Tdd::Money
   end
 
   def eql?(obj)
-    @amount == obj.amount && self.class.equal?(obj.class)
+    @amount == obj.amount && @currency == obj.currency
   end
 
   def hash
@@ -27,5 +27,9 @@ class Tdd::Money
 
   def currency
     @currency
+  end
+
+  def times(multiplier)
+    Tdd::Money.new(@amount * multiplier, @currency)
   end
 end

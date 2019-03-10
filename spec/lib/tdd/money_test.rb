@@ -25,4 +25,8 @@ RSpec.describe "Money Test" do # rubocop:disable RSpec/DescribeClass
     expect(Tdd::Money.dollar(1).currency).to eq("USD")
     expect(Tdd::Money.franc(1).currency).to eq("CHF")
   end
+
+  it "teset differenct class equality" do
+    expect(Tdd::Money.new(10, "CHF").eql?(Tdd::Franc.new(10, "CHF"))).to be_truthy
+  end
 end
