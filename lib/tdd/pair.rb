@@ -1,7 +1,7 @@
 class Tdd::Pair
   protected
 
-    attr_accessor :from, :to
+    attr_reader :from, :to
 
   public
 

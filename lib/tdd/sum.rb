@@ -1,7 +1,11 @@
 class Tdd::Sum
   include Tdd::Expression
 
-  attr_accessor :augend, :addend
+  protected
+
+    attr_reader :augend, :addend
+
+  public
 
   def initialize(augend, addend)
     @augend = augend
