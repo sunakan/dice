@@ -24,7 +24,7 @@ class Tdd::Money
   # @params [Integer] amount 量
   # @return [Tdd::Money] 米ドル通貨のMoneyインスタンス
   def self.dollar(amount)
-    Tdd::Money.new(amount, "USD")
+    Tdd::Money.new(amount, Tdd::Currency::USD)
   end
 
   # スイスフラン通貨生成メソッド
@@ -32,7 +32,7 @@ class Tdd::Money
   # @params [Integer] amount 量
   # @return [Tdd::Money] スイスフラン通貨のMoneyインスタンス
   def self.franc(amount)
-    Tdd::Money.new(amount, "CHF")
+    Tdd::Money.new(amount, Tdd::Currency::CHF)
   end
 
   # Tdd::Expression#timesの実装
