@@ -8,9 +8,13 @@ class TestCase
   def run
     setup()
     send(@name)
+    tear_down()
   end
 
   def setup
+  end
+
+  def tear_down
   end
 end
 
@@ -22,6 +26,9 @@ class WasRun < TestCase
   def test_method
     @log = "#{@log} #{__method__.to_s}"
   end
+  def tear_down
+    @log = "#{@log} #{__method__.to_s}"
+  end
 end
 
 class TestCaseTest < TestCase
@@ -30,7 +37,7 @@ class TestCaseTest < TestCase
   def test_template_method
     @test = WasRun.new("test_method")
     @test.run()
-    raise unless @test.log == "setup test_method"
+    raise unless @test.log == "setup test_method tear_down"
   end
 end
 
