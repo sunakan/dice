@@ -9,38 +9,29 @@ class TestCase
     setup()
     send(@name)
   end
+
+  def setup
+  end
 end
 
 class WasRun < TestCase
-  attr_reader :was_run, :was_setup
+  attr_reader :was_run, :log
   def setup
-    @was_run   = nil
-    @was_setup = 1
+    @log = "#{__method__.to_s}"
   end
   def test_method
-    @was_run = 1
+    @log = "#{@log} #{__method__.to_s}"
   end
 end
 
 class TestCaseTest < TestCase
   private
     attr_accessor :test
-  public
-  def test_running
-    test = WasRun.new("test_method")
-    test.run()
-    raise if test.was_run.nil?
-  end
-
-  def test_setup
-    @test.run()
-    raise if test.was_setup.nil?
-  end
-
-  def setup
+  def test_template_method
     @test = WasRun.new("test_method")
+    @test.run()
+    raise unless @test.log == "setup test_method"
   end
 end
 
-TestCaseTest.new("test_running").run()
-TestCaseTest.new("test_setup").run()
+TestCaseTest.new("test_template_method").run()
