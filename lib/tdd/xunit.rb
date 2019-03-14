@@ -44,19 +44,22 @@ class TestCaseTest < TestCase
     attr_accessor :test
   def test_template_method
     @test = WasRun.new("test_method")
-    @test.run()
+    result = TestResult.new()
+    @test.run(result)
     raise unless @test.log == "setup test_method tear_down"
   end
 
   def test_result
     @test = WasRun.new("test_method")
-    result = @test.run()
+    result = TestResult.new()
+    @test.run(result)
     raise unless result.summary() == "1 run, 0 failed"
   end
 
   def test_failed_result
     @test = WasRun.new("test_broken_method")
-    result = @test.run()
+    result = TestResult.new()
+    @test.run(result)
     raise unless result.summary() == "1 run, 1 failed"
   end
 
