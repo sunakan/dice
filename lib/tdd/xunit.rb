@@ -9,7 +9,11 @@ class TestCase
     result = TestResult.new()
     result.test_started()
     setup()
-    send(@name)
+    begin
+      send(@name)
+    rescue
+      result.test_failed()
+    end
     tear_down()
     return result
   end
@@ -30,7 +34,7 @@ class WasRun < TestCase
     @log = "#{@log} #{__method__.to_s}"
   end
   def test_broken_method
-    raise Exception
+    raise
   end
   def tear_down
     @log = "#{@log} #{__method__.to_s}"
@@ -57,25 +61,38 @@ class TestCaseTest < TestCase
     result = @test.run()
     raise unless result.summary() == "1 run, 1 failed"
   end
+
+  def test_failed_result_formatting
+    result = TestResult.new()
+    result.test_started()
+    result.test_failed()
+    raise unless result.summary() == "1 run, 1 failed"
+  end
 end
 
 class TestResult
   private
-    attr_accessor :run_count
+    attr_accessor :run_count, :error_count
   public
   def initialize
-    @run_count = 0
+    @run_count   = 0
+    @error_count = 0
   end
 
   def test_started
     @run_count += 1
   end
 
+  def test_failed
+    @error_count += 1
+  end
+
   def summary
-    "#{@run_count} run, 0 failed"
+    "#{@run_count} run, #{@error_count} failed"
   end
 end
 
-TestCaseTest.new("test_template_method").run()
-TestCaseTest.new("test_result").run()
-#TestCaseTest.new("test_failed_result").run()
+puts TestCaseTest.new("test_template_method").run().summary()
+puts TestCaseTest.new("test_result").run().summary()
+puts TestCaseTest.new("test_failed_result").run().summary()
+puts TestCaseTest.new("test_failed_result_formatting").run().summary()
