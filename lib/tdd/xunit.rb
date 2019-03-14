@@ -5,8 +5,7 @@ class TestCase
     @name = name
   end
 
-  def run
-    result = TestResult.new()
+  def run(result)
     result.test_started()
     setup()
     begin
@@ -15,7 +14,6 @@ class TestCase
       result.test_failed()
     end
     tear_down()
-    return result
   end
 
   def setup
@@ -68,6 +66,15 @@ class TestCaseTest < TestCase
     result.test_failed()
     raise unless result.summary() == "1 run, 1 failed"
   end
+
+  def test_suite
+    suite = TestSuite.new()
+    suite.add(WasRun.new("test_method"))
+    suite.add(WasRun.new("test_broken_method"))
+    result = TestResult.new()
+    suite.run(result)
+    raise unless result.summary() == "2 run, 1 failed"
+  end
 end
 
 class TestResult
@@ -92,7 +99,31 @@ class TestResult
   end
 end
 
-puts TestCaseTest.new("test_template_method").run().summary()
-puts TestCaseTest.new("test_result").run().summary()
-puts TestCaseTest.new("test_failed_result").run().summary()
-puts TestCaseTest.new("test_failed_result_formatting").run().summary()
+class TestSuite
+  private
+    attr_accessor :tests
+  public
+  def initialize
+    @tests = []
+  end
+
+  def add(test)
+    @tests.push(test)
+  end
+
+  def run(result)
+    @tests.each do |test|
+      test.run(result)
+    end
+  end
+end
+
+suite = TestSuite.new()
+suite.add(TestCaseTest.new("test_template_method"))
+suite.add(TestCaseTest.new("test_result"))
+suite.add(TestCaseTest.new("test_failed_result"))
+suite.add(TestCaseTest.new("test_failed_result_formatting"))
+suite.add(TestCaseTest.new("test_suite"))
+result = TestResult.new()
+suite.run(result)
+puts result.summary()
