@@ -1,27 +1,29 @@
 require "rails_helper"
 
 RSpec.describe Tdd::Money do
+
   let(:five_bucks)  { Tdd::Money.dollar(5) }
   let(:five_francs) { Tdd::Money.franc(5) }
   let(:ten_bucks)   { Tdd::Money.dollar(10) }
   let(:ten_francs)  { Tdd::Money.franc(10) }
   let(:bank) { Tdd::Bank.new.tap {|bank| bank.add_rate(Tdd::Currency::CHF, Tdd::Currency::USD, 2) } }
-  it "乗算" do
-    expect(five_bucks.times(2)).to eql(Tdd::Money.dollar(10))
-    expect(five_bucks.times(3)).to eql(Tdd::Money.dollar(15))
-    expect(five_francs.times(2)).to eql(Tdd::Money.franc(10))
-    expect(five_francs.times(3)).to eql(Tdd::Money.franc(15))
+
+  describe "乗算" do
+    it { expect(five_bucks.times(2)).to eql(Tdd::Money.dollar(10)) }
+    it { expect(five_bucks.times(3)).to eql(Tdd::Money.dollar(15)) }
+    it { expect(five_francs.times(2)).to eql(Tdd::Money.franc(10)) }
+    it { expect(five_francs.times(3)).to eql(Tdd::Money.franc(15)) }
   end
 
-  it "等価性" do
-    expect(Tdd::Money.dollar(5)).to be_eql(Tdd::Money.dollar(5))
-    expect(Tdd::Money.dollar(5)).not_to be_eql(Tdd::Money.dollar(6))
-    expect(Tdd::Money.dollar(5)).not_to be_eql(Tdd::Money.franc(5))
+  describe "等価性" do
+    it { expect(Tdd::Money.dollar(5)).to be_eql(Tdd::Money.dollar(5)) }
+    it { expect(Tdd::Money.dollar(5)).not_to be_eql(Tdd::Money.dollar(6)) }
+    it { expect(Tdd::Money.dollar(5)).not_to be_eql(Tdd::Money.franc(5)) }
   end
 
-  it "ファクトリメソッドから生成されたインスタンスの通貨名" do
-    expect(Tdd::Money.dollar(1).currency).to eq(Tdd::Currency::USD)
-    expect(Tdd::Money.franc(1).currency).to eq(Tdd::Currency::CHF)
+  describe "ファクトリメソッドから生成されたインスタンスの通貨名" do
+    it { expect(Tdd::Money.dollar(1).currency).to eq(Tdd::Currency::USD) }
+    it { expect(Tdd::Money.franc(1).currency).to eq(Tdd::Currency::CHF) }
   end
 
   it "加算" do
