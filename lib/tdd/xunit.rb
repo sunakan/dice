@@ -9,7 +9,7 @@ class TestCase
     result.test_started()
     setup()
     begin
-      send(@name)
+      send(name)
     rescue
       result.test_failed()
     end
@@ -29,13 +29,13 @@ class WasRun < TestCase
     @log = "#{__method__.to_s}"
   end
   def test_method
-    @log = "#{@log} #{__method__.to_s}"
+    @log = "#{log} #{__method__.to_s}"
   end
   def test_broken_method
     raise
   end
   def tear_down
-    @log = "#{@log} #{__method__.to_s}"
+    @log = "#{log} #{__method__.to_s}"
   end
 end
 
@@ -43,23 +43,23 @@ class TestCaseTest < TestCase
   private
     attr_accessor :test
   def test_template_method
-    @test = WasRun.new("test_method")
+    test = WasRun.new("test_method")
     result = TestResult.new()
-    @test.run(result)
-    raise unless @test.log == "setup test_method tear_down"
+    test.run(result)
+    raise unless test.log == "setup test_method tear_down"
   end
 
   def test_result
     @test = WasRun.new("test_method")
     result = TestResult.new()
-    @test.run(result)
+    test.run(result)
     raise unless result.summary() == "1 run, 0 failed"
   end
 
   def test_failed_result
     @test = WasRun.new("test_broken_method")
     result = TestResult.new()
-    @test.run(result)
+    test.run(result)
     raise unless result.summary() == "1 run, 1 failed"
   end
 
@@ -98,7 +98,7 @@ class TestResult
   end
 
   def summary
-    "#{@run_count} run, #{@error_count} failed"
+    "#{run_count} run, #{error_count} failed"
   end
 end
 
@@ -111,11 +111,11 @@ class TestSuite
   end
 
   def add(test)
-    @tests.push(test)
+    tests.push(test)
   end
 
   def run(result)
-    @tests.each do |test|
+    tests.each do |test|
       test.run(result)
     end
   end
