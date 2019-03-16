@@ -34,5 +34,9 @@ module App
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # 廃止
+    # autoload_paths += %W(#{config.root}/lib)
+    config.paths.add "lib", eager_load: true
   end
 end

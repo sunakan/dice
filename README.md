@@ -4,6 +4,40 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/9459ae16e000e5444cfb/maintainability)](https://codeclimate.com/github/sunakan/dice/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9459ae16e000e5444cfb/test_coverage)](https://codeclimate.com/github/sunakan/dice/test_coverage)
 
+## 実行
+
+```
+# アプリ実行
+$ sudo docker-compose up app
+# Jenkins
+$ sudo docker-compose up jenkins
+# DBセットアップ
+$ sh setup_db.sh
+```
+## ブランチ管理のワークフロー
+
+- github flow
+
+## 学習項目
+
+- github flow
+- Docker
+- Heroku(Rails)
+- CircleCIによる自動テストと自動デプロイ
+- CodeClimateを利用したコード品質とカバレッジの可視化
+- RailsとMongoDB
+- Railsで複数DB
+  - 勉強するときに重宝
+- Ridgepoleを使ったスキーマファイルの管理(複数DB)
+  - Not マイグレーションファイル
+- Paizaの公開されている練習問題(途中)
+- TechProjinが公開しているSQL練習問題(途中、終わりはある)
+  - ActiveRecordと生SQL両方
+- Jenkinsによるローカルでの自動テスト
+  - Dockerで毎回立て直す(あくまでローカル用、pushしたらCircleCIがしてくれる)
+  - 自動テストだけで、レポート類は一旦諦めてる
+- 書籍: テスト駆動開発(lib/tdd以下)
+
 ## 複数DB
 
 - 設定ファイル
@@ -12,23 +46,16 @@
     - config/mongoid.yml
   - sub
     - config/ext\_datases/\*\_database.yml
-- Model
+- Model(ActiveRecord限定)
   - main
     - app/models/直下
-  - sub
-    - app/models/hoge.rb
+  - sub(hogeDBを追加したい時)
+    - app/models/hoge.rbの大まかな中身
       - Hoge::DATABASE_YAML = hoge\_database.ymlへのパス
       - Hoge::AppRecordがサブDBへのconnectionを貼る
       - Hoge::AppRecordはabstract class
     - app/models/hoge/\*.rb
       - Hoge::User << Hoge::AppRecord
-
-## 実行
-
-```
-$ sudo docker-compose up
-$ sh setup_db.sh
-```
 
 ## Dockerfileの個人的ポイント
 
