@@ -14,8 +14,8 @@ RSpec.describe Tdd::Triangle do
   end
 
   describe "三角形ではない時、例外を投げる" do
-    it { expect(Tdd::Triangle.judge(0,0,0)).to raise_error }
-    it { expect(Tdd::Triangle.judge(1,2,3)).to raise_error }
-    it { expect(Tdd::Triangle.judge(-1,-1,-1)).to raise_error }
+    it { expect{ Tdd::Triangle.judge(0,0,0) }.to raise_error(ArgumentError) }
+    it { expect{ Tdd::Triangle.judge(1,2,3) }.to raise_error(ArgumentError) }
+    it { expect{ Tdd::Triangle.judge(-1,-1,-1) }.to raise_error(ArgumentError) }
   end
 end
