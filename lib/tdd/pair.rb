@@ -1,4 +1,5 @@
 class Tdd::Pair
+
   protected
 
     attr_reader :from, :to
@@ -12,7 +13,7 @@ class Tdd::Pair
 
   # eql?のオーバーライド
   def eql?(other)
-    @from == other.from && @to == other.to
+    from == other.from && to == other.to
   end
 
   # eql?のオーバーライドに伴うhashのオーバーライド

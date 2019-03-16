@@ -1,8 +1,7 @@
 class Tdd::Money
   include Tdd::Expression
 
-  attr_accessor :amount
-  attr_reader :currency
+  attr_reader :amount, :currency
 
   def initialize(amount, currency)
     @amount   = amount
@@ -11,12 +10,12 @@ class Tdd::Money
 
   # eql?のオーバーライド
   def eql?(other)
-    @amount == other.amount && @currency == other.currency
+    amount == other.amount && currency == other.currency
   end
 
   # eql?のオーバーライドに伴うhashのオーバーライド
   def hash
-    @amount.hash
+    amount.hash
   end
 
   # 米ドル通貨生成メソッド
@@ -37,7 +36,7 @@ class Tdd::Money
 
   # Tdd::Expression#timesの実装
   def times(multiplier)
-    Tdd::Money.new(@amount * multiplier, @currency)
+    Tdd::Money.new(amount * multiplier, currency)
   end
 
   # Tdd::Expression#plusの実装
@@ -47,7 +46,7 @@ class Tdd::Money
 
   # Tdd::Expression#reduceの実装
   def reduce(bank, to)
-    rate = bank.rate(@currency, to)
-    Tdd::Money.new(@amount / rate, to)
+    rate = bank.rate(currency, to)
+    Tdd::Money.new(amount / rate, to)
   end
 end

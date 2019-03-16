@@ -19,12 +19,12 @@ class Tdd::Sum
 
   # Tdd::Expression#plusの実装
   def times(multiplier)
-    Tdd::Sum.new(@augend.times(multiplier), @addend.times(multiplier))
+    Tdd::Sum.new(augend.times(multiplier), addend.times(multiplier))
   end
 
   # Tdd::Expression#reduceの実装
   def reduce(bank, to)
-    amount = @augend.reduce(bank, to).amount + @addend.reduce(bank, to).amount
+    amount = augend.reduce(bank, to).amount + addend.reduce(bank, to).amount
     Tdd::Money.new(amount, to)
   end
 end
