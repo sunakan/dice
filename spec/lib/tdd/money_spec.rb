@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Tdd::Money do
-
   let(:five_bucks)  { Tdd::Money.dollar(5) }
   let(:five_francs) { Tdd::Money.franc(5) }
   let(:ten_bucks)   { Tdd::Money.dollar(10) }

@@ -1,5 +1,4 @@
 class Tdd::Pair
-
   protected
 
     attr_reader :from, :to
