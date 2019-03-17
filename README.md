@@ -38,6 +38,7 @@ $ sh setup_db.sh
   - 自動テストだけで、レポート類は一旦諦めてる
 - 書籍: テスト駆動開発(lib/tdd以下)
 - RailsとPlantUMLとUML
+- 書籍: 達人に学ぶSQL徹底指南書(旧版)
 
 ## ER図
 
