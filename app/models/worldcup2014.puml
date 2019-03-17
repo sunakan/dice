@@ -1,0 +1,36 @@
+@startuml
+hide empty members
+entity Country {
+  id
+  name
+  ranking
+  group_name
+}
+entity Player {
+  id
+  country_id
+  uniform_num
+  position
+  name
+  club
+  height
+  weight
+}
+entity Pairing {
+  id
+  kickofff
+  my_country_id
+  enemy_country_id
+}
+entity Goal {
+  id
+  pairing_id
+  player_id
+  goal_time
+}
+
+Country }--|| Player
+Country }--|| Pairing
+Pairing ||--{ Goal
+Player  |o--{ Goal
+@enduml

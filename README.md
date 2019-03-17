@@ -37,6 +37,14 @@ $ sh setup_db.sh
   - Dockerで毎回立て直す(あくまでローカル用、pushしたらCircleCIがしてくれる)
   - 自動テストだけで、レポート類は一旦諦めてる
 - 書籍: テスト駆動開発(lib/tdd以下)
+- RailsとPlantUMLとUML
+
+## ER図
+
+- worldcup2014
+- [PlantUML](http://www.plantuml.com/plantuml/uml/NP1DRiGW38Ntd88Bv0uZTT5jRu2On4ci11CvHXKQvkwre2bAD_3U4tp-UPpYMLBOpOeJM0Y7P1iWF85F0oIezYCc4ixsPQp5IG_o0VHYJnlIechXc0vNu_Vrwslt6RX_6Xl5LPC8vyZ1KGhgZdYYOAIE7lVqr6i5N5PHyTr4XtjaBTtf6uvRdETPPSZkLWi8Rb6dV4Q_TyJHcAwPsdtJYpvpWdKuSotZFGob_0xvFsmWSpLPoZ2yQZ7JtbjRub_q09fq_py0)
+
+![worldcup2014_erd](http://www.plantuml.com/plantuml/svg/NP1DRiGW38Ntd88Bv0uZTT5jRu2On4ci11CvHXKQvkwre2bAD_3U4tp-UPpYMLBOpOeJM0Y7P1iWF85F0oIezYCc4ixsPQp5IG_o0VHYJnlIechXc0vNu_Vrwslt6RX_6Xl5LPC8vyZ1KGhgZdYYOAIE7lVqr6i5N5PHyTr4XtjaBTtf6uvRdETPPSZkLWi8Rb6dV4Q_TyJHcAwPsdtJYpvpWdKuSotZFGob_0xvFsmWSpLPoZ2yQZ7JtbjRub_q09fq_py0)
 
 ## 複数DB
 
