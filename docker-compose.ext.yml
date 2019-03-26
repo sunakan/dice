@@ -1,0 +1,26 @@
+---
+# Railsとは直接は関係ないサービス群
+
+version: "3"
+
+services:
+  # buildが指定してある場合は、imageは不要(buildが優先される)
+  # docker-compose exec jenkins /var/jenkins_home/secrets/initialAdminPassword
+  jenkins:
+    build:
+      context: ./containers/jenkins
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/dice
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  plantuml:
+    image: plantuml/plantuml-server:jetty
+    ports:
+      - 8082:8080
+
+networks:
+  default:
+    name: ext-dice-net
