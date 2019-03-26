@@ -21,8 +21,13 @@ pipeline {
     stage("rspec") {
       steps {
         sh "docker exec -e RAILS_ENV=test -i dice_app bundle exec rspec --no-color --format RspecJunitFormatter --out spec/reports/rspec.xml --format progress spec"
-        sh "docker cp dice_app:/app/spec/reports/rspec.xml ./spec/reports/rspec.xml"
-        sh "docker cp dice_app:/app/coverage ./coverage"
+      }
+    }
+    stage("copy reports") {
+      steps {
+        sh "mkdir -p spec/reports"
+        sh "docker cp dice_app:/app/spec/reports/rspec.xml spec/reports/rspec.xml"
+        sh "docker cp dice_app:/app/coverage coverage"
       }
     }
   }
