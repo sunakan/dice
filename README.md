@@ -35,7 +35,8 @@ $ sh setup_db.sh
   - ActiveRecordと生SQL両方
 - Jenkinsによるローカルでの自動テスト
   - Dockerで毎回立て直す(あくまでローカル用、pushしたらCircleCIがしてくれる)
-  - 自動テストだけで、レポート類は一旦諦めてる
+  - ~~自動テストだけで、レポート類は一旦諦めてる~~
+  - レポートも出す
 - 書籍: テスト駆動開発(lib/tdd以下)
 - RailsとPlantUMLとUML
 
