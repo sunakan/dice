@@ -33,6 +33,9 @@ pipeline {
   }
   post {
     always {
+      echo "=====rspec result"
+      sh "head -n 2 spec/reports/rspec.xml | tail -n 1 | awk 'gsub(/\"/, \"\") {print \$3,\$4,\$5,\$6}'"
+      echo "====="
       junit "spec/reports/rspec.xml"
       cobertura(
         autoUpdateHealth: false,
