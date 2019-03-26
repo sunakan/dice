@@ -4,23 +4,11 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: "3"))
   }
   stages {
-    //stage("checkout") {
-    //  steps {
-    //    checkout scm
-    //  }
-    //}
-    //composeでhost側のdocker.sockを使うとコメントアウトしている部分は不要
-    // - composeを使っているのでhostでcompose upしていたらportがバッティングする
-    //stage("docker-compose build app") {
-    //  steps {
-    //    sh "docker-compose build app"
-    //  }
-    //}
-    //stage("docker-compose up -d app") {
-    //  steps {
-    //    sh "docker-compose up -d app"
-    //  }
-    //}
+    stage("checkout") {
+      steps {
+        checkout scm
+      }
+    }
     stage("setup db") {
       steps {
         sh "docker exec dice_app dockerize -wait tcp://mariadb:3306 -timeout 1m"
@@ -32,31 +20,29 @@ pipeline {
     }
     stage("rspec") {
       steps {
-        sh "docker exec -e RAILS_ENV=test -e SPEC_OPTS='--no-color' -i dice_app bundle exec rspec --format RspecJunitFormatter --out spec/reports/rspec.xml --format progress spec"
+        sh "docker exec -e RAILS_ENV=test -i dice_app bundle exec rspec --no-color --format RspecJunitFormatter --out spec/reports/rspec.xml --format progress spec"
+        sh "docker cp dice_app:/app/spec/reports/rspec.xml ./spec/reports/rspec.xml"
+        sh "docker cp dice_app:/app/coverage ./coverage"
       }
     }
   }
   post {
     always {
-      echo "always"
-      //sh "docker-compose down"
-      // rspecの共有しているdockerでやっているため、出力先もworkspace以下ではなく、/dice以下となる
-      // workspaceの外に出れない
-      //junit "/dice/spec/reports/rspec.xml"
-      //cobertura(
-      //  autoUpdateHealth: false,
-      //  autoUpdateStability: false,
-      //  coberturaReportFile: "/dice/coverage/coverage.xml",
-      //  conditionalCoverageTargets: "70, 0, 0",
-      //  failUnhealthy: false,
-      //  failUnstable: false,
-      //  lineCoverageTargets: "80, 0, 0",
-      //  maxNumberOfBuilds: 0,
-      //  methodCoverageTargets: "80, 0, 0",
-      //  onlyStable: false,
-      //  sourceEncoding: "ASCII",
-      //  zoomCoverageChart: false
-      //)
+      junit "spec/reports/rspec.xml"
+      cobertura(
+        autoUpdateHealth: false,
+        autoUpdateStability: false,
+        coberturaReportFile: "coverage/coverage.xml",
+        conditionalCoverageTargets: "70, 0, 0",
+        failUnhealthy: false,
+        failUnstable: false,
+        lineCoverageTargets: "80, 0, 0",
+        maxNumberOfBuilds: 0,
+        methodCoverageTargets: "80, 0, 0",
+        onlyStable: false,
+        sourceEncoding: "ASCII",
+        zoomCoverageChart: false
+      )
     }
   }
 }
